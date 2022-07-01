@@ -1,0 +1,9 @@
+Convertor Pseudocode
+
+1. Input a value val
+2. Input unit_name, e.g. px to pt
+3. If unit_name is px, convert val from px to pt
+4. If pt to em, convert val from pt to em
+
+2. If val is in px convert to 
+2. Convert the value of val to pt
