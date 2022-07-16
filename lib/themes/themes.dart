@@ -20,8 +20,6 @@ MaterialColor scaffoldBG = MaterialColor(0xffF9F1F1, color);
 ThemeData defaultTheme = ThemeData(
   scaffoldBackgroundColor: scaffoldBG,
   primarySwatch: themeColor,
-  accentColor: themeColor,
-  //olorScheme: Colors.pink,
   fontFamily: "Chilanka",
   textTheme: const TextTheme(
     headline1: TextStyle(
@@ -30,9 +28,5 @@ ThemeData defaultTheme = ThemeData(
       fontSize: 40,
     ),
     headline5: TextStyle(fontSize: 40),
-    //titleLarge: TextStyle(fontSize: 100, color: Colors.white),
-    //headline1:
-    //a,
   ),
-  //primaryColor: themeColor,
 );

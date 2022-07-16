@@ -11,14 +11,10 @@ class UnitConvertorClass extends StatefulWidget {
 }
 
 class _UnitConvertorClassState extends State<UnitConvertorClass> {
+  /// dropdownUnits - dropdown of units
   List<DropdownMenuItem<String>> get dropdownUnits {
     List<DropdownMenuItem<String>> unitsList = [
-      DropdownMenuItem(
-          child: Text(
-            "px",
-            style: TextStyle(color: Theme.of(context).primaryColor),
-          ),
-          value: "px"),
+      const DropdownMenuItem(child: Text("px"), value: "px"),
       const DropdownMenuItem(child: Text("pt"), value: "pt"),
       const DropdownMenuItem(child: Text("em"), value: "em"),
       const DropdownMenuItem(child: Text("sp"), value: "sp"),
@@ -27,7 +23,11 @@ class _UnitConvertorClassState extends State<UnitConvertorClass> {
   }
 
   ///selectedUnit is the selected state of the drop down list item
-  String selectedUnit = "pt";
+  String selectedUnit = "px";
+  String to = "px";
+  double value = 0;
+
+  TextEditingController inputController = TextEditingController();
 
   ///_isTouched confirms if a row is being selected
   final _isTouched = false;
@@ -130,13 +130,15 @@ class _UnitConvertorClassState extends State<UnitConvertorClass> {
                 width: 250,
                 height: 40,
                 child: TextFormField(
+                  controller: inputController,
                   style: Theme.of(context).textTheme.headline4,
                   textAlign: TextAlign.right,
                   keyboardType: const TextInputType.numberWithOptions(
                     decimal: true,
                   ),
                   inputFormatters: <TextInputFormatter>[
-                    FilteringTextInputFormatter.allow(RegExp(r'[0-9,.]'))
+                    LengthLimitingTextInputFormatter(6),
+                    FilteringTextInputFormatter.allow(RegExp(r'[0-9.]'))
                   ],
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(
@@ -146,12 +148,18 @@ class _UnitConvertorClassState extends State<UnitConvertorClass> {
                       ),
                     ),
                   ),
+                  onChanged: (val) {
+                    _convert(double.parse(val), selectedUnit, "px");
+                  },
                   //validator: numberValidator,
                 ),
               ),
-              Text(
-                "words",
-                textAlign: TextAlign.right,
+              Padding(
+                padding: const EdgeInsets.only(right: 15),
+                child: Text(
+                  selectedUnit,
+                  textAlign: TextAlign.right,
+                ),
               ),
             ],
           ),
